@@ -1,8 +1,78 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="~/img/electronica-background.jpg" class="d-block w-100" alt="Imagen 1">
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/indumentaria-background.avif" class="d-block w-100" alt="Imagen 2">
+        </div>
+        <div class="carousel-item">
+            <img src="~/img/hogar-background.avif" class="d-block w-100" alt="Imagen 3">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
 </div>
+
+<main>
+    <section class="container my-5">
+        <h2 style="justify-content: center; display: flex; align-items: center;">Productos destacados</h2>
+        <div class="product-cards-container">
+            <div class="product-card">
+                @* cambiar: hay que traer los productos y precios de la base de datos *@
+                <div class="product-card-image">
+                    <img src="~/img/remera-fender-1.avif" alt="Producto">
+                </div>
+                <p class="product-card-title">Camiseta Oversized Fit</p>
+                <p class="product-card-body">
+                    Camiseta Oversized Fit
+                </p>
+                <div class="product-card-footer">
+                    <p class="product-card-price">$29.99</p>
+                    <button class="product-card-button">Agregar al carrito</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-image">
+                    <img src="~/img/campera-1.avif" alt="Producto">
+                </div>
+                <p class="product-card-title">Cazadora en mezcla de lana</p>
+                <p class="product-card-body">
+                    Cazadora en mezcla de lana
+                </p>
+                <div class="product-card-footer">
+                    <p class="product-card-price">$29.99</p>
+                    <button class="product-card-button">Agregar al carrito</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-card-image">
+                    <img src="~/img/tecno-0.jpeg" alt="Producto">
+                </div>
+                <p class="product-card-title">Monitor Gamer 49" Curvo</p>
+                <p class="product-card-body">
+                    Monitor Gamer 49" Curvo
+                </p>
+                <div class="product-card-footer">
+                    <p class="product-card-price">$29.99</p>
+                    <button class="product-card-button">Agregar al carrito</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

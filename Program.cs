@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using VirvisShopFinal.Context;
+
 namespace VirvisShopFinal
 {
     public class Program
@@ -5,6 +8,9 @@ namespace VirvisShopFinal
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddDbContext<VirvisDatabaseContext>(
+                options => options.UseSqlServer(builder.Configuration["ConnectionStrings:VirvisShopDBConnection"]));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

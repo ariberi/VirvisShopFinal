@@ -20,10 +20,6 @@ namespace VirvisShopFinal.Controllers
         }
 
         // GET: Products
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Products.ToListAsync());
-        //}
         public async Task<IActionResult> Index()
         {
 
@@ -157,6 +153,12 @@ namespace VirvisShopFinal.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.id == id);
+        }
+
+        // GET: Products/UserDetails
+        public async Task<IActionResult> UserDetails()
+        {
+            return View(await _context.Products.ToListAsync());
         }
     }
 }

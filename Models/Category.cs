@@ -3,7 +3,7 @@
     public enum Category
     {
 
-        Indumentari,
+        Indumentaria,
         Tecnologia,
         Hogar,
         Deportes,

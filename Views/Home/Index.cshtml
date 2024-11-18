@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<VirvisShopFinal.Models.Product>
+
+@{
     ViewData["Title"] = "Inicio";
 }
 
@@ -32,9 +34,7 @@
 <main>
     <section class="container my-5">
         <h2 style="justify-content: center; display: flex; align-items: center;">Productos destacados</h2>
-        <div class="product-cards-container">
-            <div class="product-card">
-                @* cambiar: hay que traer los productos y precios de la base de datos *@
+            @* <div class="product-card">
                 <div class="product-card-image">
                     <img src="~/img/remera-fender-1.avif" alt="Producto">
                 </div>
@@ -72,7 +72,34 @@
                     <p class="product-card-price">$29.99</p>
                     <button class="product-card-button">Agregar al carrito</button>
                 </div>
-            </div>
+            </div> *@
+        <div class="product-cards-container">
+            @if (Model != null && Model.Any())
+            {
+            
+                    @foreach (var item in Model.Take(4))
+                    {
+
+                        <div class="product-card">
+                            <div class="product-card-image">
+                                @Html.DisplayFor(modelItem => item.img)
+                            </div>
+                            <p class="product-card-title">@Html.DisplayFor(modelItem => item.name)</p>
+                            <p class="product-card-body">
+                                @Html.DisplayFor(modelItem => item.description)
+                            </p>
+                            <div class="product-card-footer">
+                                <p class="product-card-price">@Html.DisplayFor(modelItem => item.price)</p>
+                                <button class="product-card-button">Agregar al carrito</button>
+                            </div>
+                        </div>
+                    }
+            
+            } else
+            {
+                <p>No hay productos disponibles en este momento</p>
+            }
         </div>
+
     </section>
 </main>

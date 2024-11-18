@@ -43,26 +43,37 @@ namespace VirvisShopFinal.Controllers
             return View(user);
         }
 
-        // GET: Users/Create
-        public IActionResult Create()
+        // GET: Users/Register
+        public IActionResult Register()
         {
             return View();
         }
 
-        // POST: Users/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //POST: Users/Register
+        //To protect from overposting attacks, enable the specific properties you want to bind to.
+        //For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,name,lastname,email,password,role")] User user)
+        public async Task<IActionResult> Register([Bind("id,name,lastname,email,password,confirmPassword")] User register)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
+
+                var existingUser = await _context.Users.FirstOrDefaultAsync(u => u.email == register.email);
+                if (existingUser != null)
+                {
+                    TempData["ErrorMessage"] = "El email ya está en uso.";
+                    //return RedirectToAction("Register", "Users");
+                    //return View(register);
+                    return View();
+                }
+
+                _context.Add(register);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
-            return View(user);
+            return View(register);
         }
 
         // GET: Users/Edit/5
@@ -153,5 +164,32 @@ namespace VirvisShopFinal.Controllers
         {
             return _context.Users.Any(e => e.id == id);
         }
+
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Login(User user)
+        {
+            var userInDb = _context.Users.FirstOrDefault(u => u.email == user.email && u.password == user.password);
+            if (userInDb != null)
+            {
+                if (userInDb.role == Role.Admin)
+                {
+                    return RedirectToAction("Admin", "Products");
+                }
+
+                return RedirectToAction("Index", "Home");
+            }
+            ModelState.AddModelError("", "Credenciales incorrectas");
+            return View();
+        }
+
+
+
+
+
     }
 }

@@ -1,6 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using VirvisShopFinal.Context;
 using VirvisShopFinal.Models;

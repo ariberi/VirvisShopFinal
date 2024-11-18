@@ -1,37 +1,66 @@
 ﻿@model IEnumerable<VirvisShopFinal.Models.Product>
 
 @{
-    ViewData["Title"] = "Productos";
+    ViewData["Title"] = "Admin";
 }
 
-<main>
-    <section class="container my-5">
-        <h2 style="justify-content: center; display: flex; align-items: center;">Productos</h2>
-        <div class="product-cards-container">
-            @if (Model != null && Model.Any())
-            {
-                @foreach (var item in Model.Take(4))
-                {
+<h1>Admin</h1>
 
-                    <div class="product-card">
-                        <div class="product-card-image">
-                            @Html.DisplayFor(modelItem => item.img)
-                        </div>
-                        <p class="product-card-title">@Html.DisplayFor(modelItem => item.name)</p>
-                        <p class="product-card-body">
-                            @Html.DisplayFor(modelItem => item.description)
-                        </p>
-                        <div class="product-card-footer">
-                            <p class="product-card-price">@Html.DisplayFor(modelItem => item.price)</p>
-                            <button class="product-card-button">Agregar al carrito</button>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <p>No hay productos disponibles en este momento</p>
-            }
-        </div>
-    </section>
-</main>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead style="color: white">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.img)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.descuento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.category)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+    <tr style="color: white">
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.img)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.descuento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.category)
+        </td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+            <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+            <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+        </td>
+    </tr>
+}
+    </tbody>
+</table>

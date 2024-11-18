@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿    using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +18,7 @@ namespace VirvisShopFinal.Context
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<ProductosDescatados>  ProductosDescatados { get; set; }
+
     }
 }

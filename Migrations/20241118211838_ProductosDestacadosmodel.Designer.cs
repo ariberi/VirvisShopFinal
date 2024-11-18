@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VirvisShopFinal.Context;
 
@@ -10,9 +11,11 @@ using VirvisShopFinal.Context;
 namespace VirvisShopFinal.Migrations
 {
     [DbContext(typeof(VirvisDatabaseContext))]
-    partial class VirvisDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241118211838_ProductosDestacadosmodel")]
+    partial class ProductosDestacadosmodel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

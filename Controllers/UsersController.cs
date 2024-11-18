@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -68,7 +69,7 @@ namespace VirvisShopFinal.Controllers
                     //return View(register);
                     return View();
                 }
-
+                register.role = Role.User;
                 _context.Add(register);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
@@ -176,6 +177,8 @@ namespace VirvisShopFinal.Controllers
             var userInDb = _context.Users.FirstOrDefault(u => u.email == user.email && u.password == user.password);
             if (userInDb != null)
             {
+                HttpContext.Session.SetString("UserEmail", user.email);
+                HttpContext.Session.SetString("UserRole", user.role.ToString());
                 if (userInDb.role == Role.Admin)
                 {
                     return RedirectToAction("Admin", "Products");

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VirvisShopFinal.Context;
 
@@ -10,9 +11,11 @@ using VirvisShopFinal.Context;
 namespace VirvisShopFinal.Migrations
 {
     [DbContext(typeof(VirvisDatabaseContext))]
-    partial class VirvisDatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20241118210211_VirvisShopFinal.Context.VirvisDatabaseContext")]
+    partial class VirvisShopFinalContextVirvisDatabaseContext
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,24 +56,6 @@ namespace VirvisShopFinal.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("VirvisShopFinal.Models.ProductosDescatados", b =>
-                {
-                    b.Property<int>("codDestacado")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("codDestacado"));
-
-                    b.Property<int>("Productid")
-                        .HasColumnType("int");
-
-                    b.HasKey("codDestacado");
-
-                    b.HasIndex("Productid");
-
-                    b.ToTable("ProductosDescatados");
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.Review", b =>
@@ -134,17 +119,6 @@ namespace VirvisShopFinal.Migrations
                     b.HasKey("id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("VirvisShopFinal.Models.ProductosDescatados", b =>
-                {
-                    b.HasOne("VirvisShopFinal.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("Productid")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.Review", b =>

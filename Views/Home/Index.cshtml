@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VirvisShopFinal.Models.Product>
+﻿@model IEnumerable<VirvisShopFinal.Models.ProductosDescatados>
 
 @{
     ViewData["Title"] = "Inicio";
@@ -15,10 +15,10 @@
             <img src="~/img/electronica-background.jpg" class="d-block w-100" alt="Imagen 1">
         </div>
         <div class="carousel-item">
-            <img src="~/img/indumentaria-background.avif" class="d-block w-100" alt="Imagen 2">
+            <img src="~/img/electronica-background.jpg" class="d-block w-100" alt="Imagen 2">
         </div>
         <div class="carousel-item">
-            <img src="~/img/hogar-background.avif" class="d-block w-100" alt="Imagen 3">
+            <img src="~/img/electronica-background.jpg" class="d-block w-100" alt="Imagen 3">
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -76,20 +76,21 @@
         <div class="product-cards-container">
             @if (Model != null && Model.Any())
             {
-            
+   
                     @foreach (var item in Model.Take(4))
                     {
 
                         <div class="product-card">
                             <div class="product-card-image">
-                                @Html.DisplayFor(modelItem => item.img)
+                            <img src="@item.Product.img" alt="@item.Product.name" />
+
                             </div>
-                            <p class="product-card-title">@Html.DisplayFor(modelItem => item.name)</p>
+                            <p class="product-card-title">@Html.DisplayFor(modelItem => item.Product.name)</p>
                             <p class="product-card-body">
-                                @Html.DisplayFor(modelItem => item.description)
+                                @Html.DisplayFor(modelItem => item.Product.description)
                             </p>
                             <div class="product-card-footer">
-                                <p class="product-card-price">@Html.DisplayFor(modelItem => item.price)</p>
+                                <p class="product-card-price">@Html.DisplayFor(modelItem => item.Product.price)</p>
                                 <button class="product-card-button">Agregar al carrito</button>
                             </div>
                         </div>

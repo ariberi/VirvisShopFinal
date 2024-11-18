@@ -12,8 +12,9 @@ namespace VirvisShopFinal
 
             builder.Services.AddDbContext<VirvisDatabaseContext>(
                 options => options.UseSqlServer(builder.Configuration["ConnectionStrings:VirvisShopDBConnection"]));
+            builder.Services.AddSession();
 
-            
+
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -34,6 +35,7 @@ namespace VirvisShopFinal
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseSession(); 
 
             app.MapControllerRoute(
                 name: "default",

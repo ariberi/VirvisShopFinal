@@ -12,6 +12,7 @@ namespace VirvisShopFinal.Context
     {
         public VirvisDatabaseContext(DbContextOptions<VirvisDatabaseContext> options) : base(options)
         {
+
         }
         public DbSet<User> Users { get; set; }
 
@@ -19,6 +20,10 @@ namespace VirvisShopFinal.Context
 
         public DbSet<Review> Reviews { get; set; }
         public DbSet<ProductosDescatados>  ProductosDescatados { get; set; }
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
 
     }
 }

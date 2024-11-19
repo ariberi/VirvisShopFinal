@@ -69,7 +69,7 @@ namespace VirvisShopFinal.Controllers
                     //return View(register);
                     return View();
                 }
-                register.role = Role.User;
+                register.Role = RoleEnum.User;
                 _context.Add(register);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
@@ -175,13 +175,18 @@ namespace VirvisShopFinal.Controllers
         public IActionResult Login(User user)
         {
             var userInDb = _context.Users.FirstOrDefault(u => u.email == user.email && u.password == user.password);
+            Console.WriteLine(userInDb.ToString());
             if (userInDb != null)
             {
+                var role = (RoleEnum)user.Role.codRole;
                 HttpContext.Session.SetString("UserEmail", user.email);
-                HttpContext.Session.SetString("UserRole", user.role.ToString());
-                if (userInDb.role == Role.Admin)
+                HttpContext.Session.SetString("UserRole", role.ToString());
+                Console.WriteLine("----");
+                Console.WriteLine("----" + HttpContext.Session.GetString("UserRole"));
+                Console.WriteLine("----");
+                if (role == RoleEnum.Admin)
                 {
-                    return RedirectToAction("Admin", "Products");
+                    return RedirectToAction("Index", "Home");
                 }
 
                 return RedirectToAction("Index", "Home");

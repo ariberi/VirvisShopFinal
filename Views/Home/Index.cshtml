@@ -34,52 +34,11 @@
 <main>
     <section class="container my-5">
         <h2 style="justify-content: center; display: flex; align-items: center;">Productos destacados</h2>
-            @* <div class="product-card">
-                <div class="product-card-image">
-                    <img src="~/img/remera-fender-1.avif" alt="Producto">
-                </div>
-                <p class="product-card-title">Camiseta Oversized Fit</p>
-                <p class="product-card-body">
-                    Camiseta Oversized Fit
-                </p>
-                <div class="product-card-footer">
-                    <p class="product-card-price">$29.99</p>
-                    <button class="product-card-button">Agregar al carrito</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-card-image">
-                    <img src="~/img/campera-1.avif" alt="Producto">
-                </div>
-                <p class="product-card-title">Cazadora en mezcla de lana</p>
-                <p class="product-card-body">
-                    Cazadora en mezcla de lana
-                </p>
-                <div class="product-card-footer">
-                    <p class="product-card-price">$29.99</p>
-                    <button class="product-card-button">Agregar al carrito</button>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-card-image">
-                    <img src="~/img/tecno-0.jpeg" alt="Producto">
-                </div>
-                <p class="product-card-title">Monitor Gamer 49" Curvo</p>
-                <p class="product-card-body">
-                    Monitor Gamer 49" Curvo
-                </p>
-                <div class="product-card-footer">
-                    <p class="product-card-price">$29.99</p>
-                    <button class="product-card-button">Agregar al carrito</button>
-                </div>
-            </div> *@
         <div class="product-cards-container">
             @if (Model != null && Model.Any())
             {
-            
                     @foreach (var item in Model.Take(4))
                     {
-
                         <div class="product-card">
                             <div class="product-card-image">
                                 @Html.DisplayFor(modelItem => item.img)

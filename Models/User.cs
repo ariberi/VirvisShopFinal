@@ -19,4 +19,3 @@ namespace VirvisShopFinal.Models
         public ICollection<Review> Reviews { get; set; } = new List<Review>();
     }
 }
-    

@@ -13,8 +13,7 @@ namespace VirvisShopFinal
             builder.Services.AddDbContext<VirvisDatabaseContext>(
                 options => options.UseSqlServer(builder.Configuration["ConnectionStrings:VirvisShopDBConnection"]));
 
-            
-
+        
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 

@@ -10,7 +10,7 @@ using VirvisShopFinal.Models;
 
 namespace VirvisShopFinal.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private readonly VirvisDatabaseContext _context;
 
@@ -55,7 +55,7 @@ namespace VirvisShopFinal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("id,name,lastname,email,password,confirmPassword")] User register)
+        public async Task<IActionResult> Register( Register register)
         {
             if (ModelState.IsValid)
             {
@@ -64,12 +64,18 @@ namespace VirvisShopFinal.Controllers
                 if (existingUser != null)
                 {
                     TempData["ErrorMessage"] = "El email ya está en uso.";
-                    //return RedirectToAction("Register", "Users");
-                    //return View(register);
                     return View();
                 }
-                register.role = RoleType.User;
-                _context.Add(register);
+                var newUser = new User
+                {
+                    id = 0,
+                    name = register.name,
+                    lastname = register.lastname,
+                    email = register.email,
+                    password = register.password,
+                    role = RoleType.User
+                };
+                _context.Add(newUser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
@@ -176,9 +182,9 @@ namespace VirvisShopFinal.Controllers
             var userInDb = _context.Users.FirstOrDefault(u => u.email == user.email && u.password == user.password);
             if (userInDb != null)
             {
-                HttpContext.Session.SetString("Username", user.email);
-                HttpContext.Session.SetString("Role", user.role.ToString());
-                HttpContext.Session.SetString("UserId", user.id.ToString());
+                HttpContext.Session.SetString("Username", userInDb.name);
+                HttpContext.Session.SetString("Role", userInDb.role.ToString());
+                HttpContext.Session.SetString("UserId", userInDb.id.ToString());
 
 
                 if (userInDb.role == RoleType.Admin)

@@ -10,7 +10,7 @@ using VirvisShopFinal.Models;
 
 namespace VirvisShopFinal.Controllers
 {
-    public class CartsController : Controller
+    public class CartsController : BaseController
     {
         private readonly VirvisDatabaseContext _context;
 
@@ -28,7 +28,7 @@ namespace VirvisShopFinal.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userId = 3; // Obtén el UserId del usuario autenticado GetUserId();
+            var userId = GetUserId();  // Obtén el UserId del usuario autenticado GetUserId();
 
             // Obtén el carrito del usuario (solo uno, no todos)
             var cart = await _context.Carts
@@ -60,7 +60,7 @@ namespace VirvisShopFinal.Controllers
         {
             try
             {
-                var userId = 3; // Obtén el UserId del usuario autenticado GetUserId();
+                var userId = GetUserId(); // Obtén el UserId del usuario autenticado GetUserId();
 
                 // Verificar si el carrito ya existe para el usuario
                 var cart = await _context.Carts
@@ -97,7 +97,7 @@ namespace VirvisShopFinal.Controllers
 
                 await _context.SaveChangesAsync(); // Guardar cambios en la base de datos
 
-                return Json(new { success = true, message = "Producto agregado al carrito correctamente" });
+                    return Json(new { success = true, message = "Producto agregado al carrito correctamente" });
             }
             catch (Exception)
             {
@@ -171,7 +171,7 @@ namespace VirvisShopFinal.Controllers
         [HttpGet]
         public async Task<IActionResult> Checkout()
         {
-            var userId = 3; // GetUserId();
+            var userId = GetUserId();  // GetUserId();
 
             // Obtener el carrito del usuario con productos
             var cart = await _context.Carts
@@ -191,7 +191,7 @@ namespace VirvisShopFinal.Controllers
         [HttpPost]
         public async Task<IActionResult> Checkout(string paymentMethod)
         {
-            var userId = 3; // GetUserId();
+            var userId = GetUserId();  // GetUserId();
 
             // Obtener el carrito del usuario
             var cart = await _context.Carts

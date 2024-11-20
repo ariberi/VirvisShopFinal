@@ -1,24 +1,32 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
+using VirvisShopFinal.Context;
 using VirvisShopFinal.Models;
 
 namespace VirvisShopFinal.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly VirvisDatabaseContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, VirvisDatabaseContext context)
         {
             _logger = logger;
+            _context = context;
+
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+
+            var destacados = await _context.ProductosDescatados.Include(pd => pd.Product).ToListAsync();
+            return View(destacados);
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy()  
         {
             return View();
         }

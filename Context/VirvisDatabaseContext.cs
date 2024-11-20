@@ -26,6 +26,8 @@ namespace VirvisShopFinal.Context
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ProductosDescatados> ProductosDescatados { get; set; }
+
 
 
     }

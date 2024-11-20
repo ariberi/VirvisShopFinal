@@ -41,16 +41,13 @@
                                 <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Hogar</a></li>
                                 <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Otros</a></li>
                             </ul>
+                        </li>                        
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Admin productos</a>
                         </li>
-                        @if (ViewData["Role"].ToString() == "Admin")
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Admin productos</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">Admin usuarios</a>
-                            </li>
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">Admin usuarios</a>
+                        </li>
                         @if (ViewData["Username"].ToString() == null)
                         {
                             <li class="nav-item">
@@ -73,16 +70,7 @@
                                 </ul>
                             </li>
 
-                        }
-                        @if (ViewData["Role"].ToString() != "Admin")
-                        {
-
-                            <li class="nav-item">
-                                <a class="nav-link" asp-area="" asp-controller="Carts" asp-action="Index">
-                                    <i class="fas fa-shopping-cart"></i> Carrito
-                                </a>
-                            </li>
-                        }                       
+                        }                
                     </ul>
                 </div>
             </div>

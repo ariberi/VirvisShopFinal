@@ -38,7 +38,7 @@ namespace VirvisShopFinal.Migrations
                     b.HasIndex("userId")
                         .IsUnique();
 
-                    b.ToTable("Carts");
+                    b.ToTable("Carts", (string)null);
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.CartItem", b =>
@@ -67,7 +67,7 @@ namespace VirvisShopFinal.Migrations
 
                     b.HasIndex("productId");
 
-                    b.ToTable("CartItems");
+                    b.ToTable("CartItems", (string)null);
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.Order", b =>
@@ -94,7 +94,7 @@ namespace VirvisShopFinal.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.OrderItem", b =>
@@ -126,7 +126,7 @@ namespace VirvisShopFinal.Migrations
 
                     b.HasIndex("productId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.Product", b =>
@@ -160,7 +160,7 @@ namespace VirvisShopFinal.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.Review", b =>
@@ -191,7 +191,7 @@ namespace VirvisShopFinal.Migrations
 
                     b.HasIndex("userId");
 
-                    b.ToTable("Reviews");
+                    b.ToTable("Reviews", (string)null);
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.User", b =>
@@ -223,7 +223,7 @@ namespace VirvisShopFinal.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.Cart", b =>

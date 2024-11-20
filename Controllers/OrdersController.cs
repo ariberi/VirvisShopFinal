@@ -19,6 +19,11 @@ namespace VirvisShopFinal.Controllers
             _context = context;
         }
 
+        private int GetUserId()
+        {
+            return Convert.ToInt32(HttpContext.Session.GetString("UserId"));
+        }
+
         public IActionResult CardPayment()
         {
             return View();
@@ -32,7 +37,7 @@ namespace VirvisShopFinal.Controllers
                 return View(model);
             }
 
-            var userId = 3; // GetUserId();
+            var userId = GetUserId();
 
             // Obtener el carrito del usuario
             var cart = await _context.Carts

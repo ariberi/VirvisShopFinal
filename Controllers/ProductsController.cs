@@ -10,7 +10,7 @@ using VirvisShopFinal.Models;
 
 namespace VirvisShopFinal.Controllers
 {
-    public class ProductsController : Controller
+    public class ProductsController : BaseController
     {
         private readonly VirvisDatabaseContext _context;
 

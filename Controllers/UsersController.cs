@@ -10,7 +10,7 @@ using VirvisShopFinal.Models;
 
 namespace VirvisShopFinal.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private readonly VirvisDatabaseContext _context;
 
@@ -55,7 +55,7 @@ namespace VirvisShopFinal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register([Bind("id,name,lastname,email,password,confirmPassword")] User register)
+        public async Task<IActionResult> Register( Register register)
         {
             if (ModelState.IsValid)
             {
@@ -64,12 +64,18 @@ namespace VirvisShopFinal.Controllers
                 if (existingUser != null)
                 {
                     TempData["ErrorMessage"] = "El email ya está en uso.";
-                    //return RedirectToAction("Register", "Users");
-                    //return View(register);
                     return View();
                 }
-                register.role = RoleType.User;
-                _context.Add(register);
+                var newUser = new User
+                {
+                    id = 0,
+                    name = register.name,
+                    lastname = register.lastname,
+                    email = register.email,
+                    password = register.password,
+                    role = RoleType.User
+                };
+                _context.Add(newUser);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }

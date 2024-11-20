@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace VirvisShopFinal.Models
 {
@@ -28,7 +29,8 @@ namespace VirvisShopFinal.Models
         [DataType(DataType.Password)]
         public string confirmPassword { get; set; }
 
-        public string emailError { get; set; }
+        [NotMapped]
+        public string? emailError { get; set; }
 
     }
 }

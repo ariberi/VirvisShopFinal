@@ -182,9 +182,9 @@ namespace VirvisShopFinal.Controllers
             var userInDb = _context.Users.FirstOrDefault(u => u.email == user.email && u.password == user.password);
             if (userInDb != null)
             {
-                HttpContext.Session.SetString("Username", user.email);
-                HttpContext.Session.SetString("Role", user.role.ToString());
-                HttpContext.Session.SetString("UserId", user.id.ToString());
+                HttpContext.Session.SetString("Username", userInDb.name);
+                HttpContext.Session.SetString("Role", userInDb.role.ToString());
+                HttpContext.Session.SetString("UserId", userInDb.id.ToString());
 
 
                 if (userInDb.role == RoleType.Admin)

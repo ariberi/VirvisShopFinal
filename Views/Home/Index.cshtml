@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VirvisShopFinal.Models.Product>
+﻿@model IEnumerable<VirvisShopFinal.Models.ProductosDescatados>
 
 @{
     ViewData["Title"] = "Inicio";
@@ -41,14 +41,14 @@
                     {
                         <div class="product-card">
                             <div class="product-card-image">
-                                @Html.DisplayFor(modelItem => item.img)
+                                @Html.DisplayFor(modelItem => item.Product.img)
                             </div>
-                            <p class="product-card-title">@Html.DisplayFor(modelItem => item.name)</p>
+                        <p class="product-card-title">@Html.DisplayFor(modelItem => item.Product.name)</p>
                             <p class="product-card-body">
-                                @Html.DisplayFor(modelItem => item.description)
+                            @Html.DisplayFor(modelItem => item.Product.description)
                             </p>
                             <div class="product-card-footer">
-                                <p class="product-card-price">@Html.DisplayFor(modelItem => item.price)</p>
+                            <p class="product-card-price">@Html.DisplayFor(modelItem => item.Product.price)</p>
                                 <button class="product-card-button">Agregar al carrito</button>
                             </div>
                         </div>

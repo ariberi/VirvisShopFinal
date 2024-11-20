@@ -41,8 +41,8 @@
                     {
                         <div class="product-card">
                             <div class="product-card-image">
-                                @Html.DisplayFor(modelItem => item.Product.img)
-                            </div>
+                            <img src="@item.Product.img" alt="@item.Product.name" />
+                        </div>
                         <p class="product-card-title">@Html.DisplayFor(modelItem => item.Product.name)</p>
                             <p class="product-card-body">
                             @Html.DisplayFor(modelItem => item.Product.description)

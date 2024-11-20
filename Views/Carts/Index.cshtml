@@ -1,0 +1,127 @@
+﻿@model VirvisShopFinal.Models.Cart
+
+@{
+    ViewData["Title"] = "Carrito";
+}
+
+<h2>Carrito de Compras</h2>
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <table class="table" style="color: white">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+
+                var total = item.quantity * item.Product.price;
+
+                <tr>
+                    <!-- Muestra el nombre del producto -->
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.name)
+                    </td>
+
+                    <!-- Formulario para actualizar la cantidad del producto en el carrito -->
+                    @* <td>
+                        <form asp-action="UpdateCart" method="post">
+                            <input type="hidden" name="cartItemId" value="@item.id" />
+                            <input type="number" name="quantity" value="@item.quantity" min="1" />
+                            <button class="product-card-button" type="submit">Actualizar</button>
+                        </form>
+                    </td> *@
+
+                    <td>
+                        <input type="number" class="quantity-input" data-cartitemid="@item.id" value="@item.quantity" min="1" />
+                    </td>
+
+                    <!-- Muestra el precio unitario del producto -->
+                    <td>@item.Product.price.ToString("C")</td>
+
+                    <!-- Calcula y muestra el total para el producto -->
+                    <td>
+                        @total.ToString("C")
+                    </td>
+
+                    <!-- Enlace para eliminar el producto del carrito -->
+                    <td>
+                        <button class="remove-from-cart" data-cartitemid="@item.id">Eliminar</button>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Muestra el total general del carrito -->
+    <p><strong>Total del carrito: </strong>@Model.Items.Sum(ci => ci.quantity * ci.Product.price).ToString("C")</p>
+
+    <!-- Botón para proceder al pago -->
+    <a href="@Url.Action("Checkout", "Order")" class="product-card-button">Proceder al Pago</a>
+}
+else
+{
+    <p>No tienes productos en tu carrito. <a asp-area="" asp-controller="Products" asp-action="UserDetails">Ver productos</a></p>
+}
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Cuando el usuario cambie la cantidad y haga clic en el botón "Actualizar"
+        $(document).on('change', '.quantity-input', function () {
+            var cartItemId = $(this).data('cartitemid');  // Obtener el cartItemId desde el atributo data
+            var quantity = $(this).val();  // Obtener la nueva cantidad
+
+            // Enviar solicitud AJAX para actualizar la cantidad
+            $.ajax({
+                url: '@Url.Action("UpdateCart", "Carts")',  // Acción en el controlador
+                type: 'POST',
+                data: { cartItemId: cartItemId, quantity: quantity },  // Enviar cartItemId y quantity
+                success: function (response) {
+                    // Mostrar mensaje basado en la respuesta del servidor
+                    // alert(response.message);
+
+                    if (response.success) {
+                        location.reload();  // Recargar la página para reflejar la actualización
+                    }
+                },
+                error: function () {
+                    alert("Hubo un problema al actualizar la cantidad.");
+                }
+            });
+        });
+
+        // Evento para eliminar un producto del carrito
+        $(document).on('click', '.remove-from-cart', function () {
+            var cartItemId = $(this).data('cartitemid'); // Obtener el cartItemId del atributo data
+
+            // Enviar solicitud AJAX para eliminar el producto
+            $.ajax({
+                url: '@Url.Action("RemoveFromCart", "Carts")', // Acción del controlador
+                type: 'POST',
+                data: { cartItemId: cartItemId }, // Enviar el cartItemId al servidor
+                success: function (response) {
+                    // Mostrar mensaje basado en la respuesta del servidor
+                    // alert(response.message);
+
+                    if (response.success) {
+                        location.reload(); // Recargar la página para reflejar los cambios
+
+                    }
+                },
+                error: function () {
+                    alert("Hubo un problema al eliminar el producto del carrito.");
+                }
+            });
+        });
+    </script>
+}
+

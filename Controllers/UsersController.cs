@@ -176,15 +176,27 @@ namespace VirvisShopFinal.Controllers
             var userInDb = _context.Users.FirstOrDefault(u => u.email == user.email && u.password == user.password);
             if (userInDb != null)
             {
+                HttpContext.Session.SetString("Username", user.email);
+                HttpContext.Session.SetString("Role", user.role.ToString());
+                HttpContext.Session.SetString("UserId", user.id.ToString());
+
+
                 if (userInDb.role == RoleType.Admin)
                 {
-                    return RedirectToAction("Admin", "Products");
+                    return RedirectToAction("Index", "Products");
                 }
 
                 return RedirectToAction("Index", "Home");
             }
-            ModelState.AddModelError("", "Credenciales incorrectas");
+
+            ViewBag.Error = "Credenciales incorrectas";
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "Users");
         }
 
 

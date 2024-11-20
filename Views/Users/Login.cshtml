@@ -2,7 +2,9 @@
 
 @{
     ViewData["Title"] = "Iniciar Sesion";
+    Layout = "_LayoutLogin";
 }
+
 
 <section class="form-container">
     @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form" }))
@@ -11,6 +13,14 @@
 
         <!-- Mostrar todos los errores del formulario -->
         @* @Html.ValidationSummary(false, "", new { @class = "text-danger" }) *@
+
+        <!-- Mostrar mensaje de error si ViewBag.Error tiene contenido -->
+        @if (!string.IsNullOrEmpty(ViewBag.Error as string))
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.Error
+            </div>
+        }
 
         <p id="heading">Ingresar a <a class="navbar-brand zen-dots-regular" asp-area="" asp-controller="Home" asp-action="Index">VirVis Shop</a></p>
 
@@ -40,7 +50,7 @@
                 </a>
             </div>
         </div>
-        <button class="button1">Ingresar</button>
+        <button class="button1" type="submit">Ingresar</button>
         <div style="justify-content: center; display: flex;">
             <text class="text-size">
                 ¿No tienes una cuenta?

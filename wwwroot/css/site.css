@@ -478,3 +478,24 @@ cursor: pointer;
 .product-card-button:hover {
 background-color: var(--details-color-dark);
 }
+
+
+.remove-from-cart {
+padding: 0.5em;
+border-radius: var(--radius);
+border: none;
+outline: none;
+transition: 0.4s ease-in-out;
+background-color: red;
+color: white;
+cursor: pointer;
+}
+
+.remove-from-cart:hover {
+background-color: darkred;
+}
+
+
+.quantity-input {
+border-radius: 5px;
+}

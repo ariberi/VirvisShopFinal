@@ -11,8 +11,8 @@ using VirvisShopFinal.Context;
 namespace VirvisShopFinal.Migrations
 {
     [DbContext(typeof(VirvisDatabaseContext))]
-    [Migration("20241116201533_Inicial")]
-    partial class Inicial
+    [Migration("20241119235222_UserRole")]
+    partial class UserRole
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -89,6 +89,23 @@ namespace VirvisShopFinal.Migrations
                     b.ToTable("Reviews");
                 });
 
+            modelBuilder.Entity("VirvisShopFinal.Models.Role", b =>
+                {
+                    b.Property<int>("idRole")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("idRole"));
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("idRole");
+
+                    b.ToTable("Role");
+                });
+
             modelBuilder.Entity("VirvisShopFinal.Models.User", b =>
                 {
                     b.Property<int>("id")
@@ -113,10 +130,12 @@ namespace VirvisShopFinal.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("role")
+                    b.Property<int>("roleidRole")
                         .HasColumnType("int");
 
                     b.HasKey("id");
+
+                    b.HasIndex("roleidRole");
 
                     b.ToTable("Users");
                 });
@@ -138,6 +157,17 @@ namespace VirvisShopFinal.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("VirvisShopFinal.Models.User", b =>
+                {
+                    b.HasOne("VirvisShopFinal.Models.Role", "role")
+                        .WithMany()
+                        .HasForeignKey("roleidRole")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("role");
                 });
 
             modelBuilder.Entity("VirvisShopFinal.Models.Product", b =>

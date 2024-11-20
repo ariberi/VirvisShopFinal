@@ -11,8 +11,8 @@ using VirvisShopFinal.Context;
 namespace VirvisShopFinal.Migrations
 {
     [DbContext(typeof(VirvisDatabaseContext))]
-    [Migration("20241116204613_LoginRegister")]
-    partial class LoginRegister
+    [Migration("20241119233251_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

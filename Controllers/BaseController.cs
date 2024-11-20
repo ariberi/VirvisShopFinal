@@ -13,6 +13,6 @@ public class BaseController : Controller
         ViewData["UserId"] = HttpContext.Session.GetString("UserId");
 
 
-        Console.WriteLine(HttpContext.Session.GetString("UserRole") + "BASE");
+        Console.WriteLine(HttpContext.Session.GetString("Role") + "BASE");
     }
 }

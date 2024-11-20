@@ -42,7 +42,7 @@
                                 <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Otros</a></li>
                             </ul>
                         </li>
-                        @if (ViewData["Role"].ToString() == "Admin")
+                        @if (ViewData["Role"] != null && ViewData["Role"].ToString() == "Admin")
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Products" asp-action="Index">Admin productos</a>
@@ -51,7 +51,7 @@
                                 <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Index">Admin usuarios</a>
                             </li>
                         }
-                        @if (ViewData["Username"].ToString() == null)
+                        @if (ViewData["Username"] == null)
                         {
                             <li class="nav-item">
                                 <a class="nav-link" asp-area="" asp-controller="Users" asp-action="Login">Ingresar</a>
@@ -74,7 +74,7 @@
                             </li>
 
                         }
-                        @if (ViewData["Role"].ToString() != "Admin")
+                        @if (ViewData["Role"] != null && ViewData["Role"].ToString() != "Admin")
                         {
 
                             <li class="nav-item">

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using VirvisShopFinal.Context;
 using VirvisShopFinal.Models;
 
@@ -42,6 +43,29 @@ namespace VirvisShopFinal.Controllers
 
             return View(user);
         }
+
+        // GET: Users/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: Users/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("name,lastname,email,password,role")] User user)
+        {
+            if (user.name != null && user.lastname != null && user.email != null && user.password != null && user.role != null)
+            {
+                _context.Add(user);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(user);
+        }
+
 
         // GET: Users/Register
         public IActionResult Register()
@@ -110,7 +134,7 @@ namespace VirvisShopFinal.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (user.name != null && user.lastname != null && user.email != null && user.password != null && user.role != null)
             {
                 try
                 {
@@ -185,7 +209,6 @@ namespace VirvisShopFinal.Controllers
                 HttpContext.Session.SetString("Username", userInDb.name);
                 HttpContext.Session.SetString("Role", userInDb.role.ToString());
                 HttpContext.Session.SetString("UserId", userInDb.id.ToString());
-
 
                 if (userInDb.role == RoleType.Admin)
                 {

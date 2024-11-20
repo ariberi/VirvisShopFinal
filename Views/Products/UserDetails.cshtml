@@ -15,7 +15,7 @@
 
                     <div class="product-card">
                         <div class="product-card-image">
-                            @Html.DisplayFor(modelItem => item.img)
+                            <img src="@item.img" alt="@item.name" />
                         </div>
                         <p class="product-card-title">@Html.DisplayFor(modelItem => item.name)</p>
                         <p class="product-card-body">

@@ -1,0 +1,38 @@
+﻿@model VirvisShopFinal.Models.Cart
+
+@{
+    ViewData["Title"] = "Resumen de Compra";
+}
+
+<h2>Resumen de Compra</h2>
+
+@if (Model.Items != null && Model.Items.Any())
+{
+    <p><strong>Total de productos:</strong>@Model.Items.Sum(item => item.quantity);</p>
+    
+    <!-- Muestra el total general del carrito -->
+    <p><strong>Total del carrito: </strong>@Model.Items.Sum(ci => ci.quantity * ci.Product.price).ToString("C")</p>
+
+    <form method="post">
+        <h3>Selecciona tu método de pago:</h3>
+
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="PaymentMethod" value="CreditCard" id="CreditCard" checked />
+            <label class="form-check-label" for="CreditCard">Tarjeta de Crédito/Débito</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="PaymentMethod" value="Cash" id="Cash" />
+            <label class="form-check-label" for="Cash">Efectivo</label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="PaymentMethod" value="BankTransfer" id="BankTransfer" />
+            <label class="form-check-label" for="BankTransfer">Transferencia Bancaria</label>
+        </div>
+
+        <button type="submit" class="product-card-button">Confirmar y Continuar</button>
+    </form>
+}
+else
+{
+    <p>No tienes productos en tu carrito. <a asp-area="" asp-controller="Products" asp-action="UserDetails">Ver productos</a></p>
+}

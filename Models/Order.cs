@@ -26,9 +26,6 @@ namespace VirvisShopFinal.Models
 
         public ICollection<OrderItem> Items { get; set; } = new List<OrderItem>();
 
-        // Detalles de pago directamente en Order
-        public PaymentMethod PaymentMethod { get; set; }
-        public PaymentStatus PaymentStatus { get; set; } = PaymentStatus.Pending;
-        public DateTime? PaymentDate { get; set; }
+
     }
 }

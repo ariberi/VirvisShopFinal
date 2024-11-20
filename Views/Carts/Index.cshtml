@@ -65,7 +65,7 @@
     <p><strong>Total del carrito: </strong>@Model.Items.Sum(ci => ci.quantity * ci.Product.price).ToString("C")</p>
 
     <!-- Botón para proceder al pago -->
-    <a href="@Url.Action("Checkout", "Order")" class="product-card-button">Proceder al Pago</a>
+    <a asp-area="" asp-controller="Carts" asp-action="Checkout" class="product-card-button">Proceder al Pago</a>
 }
 else
 {

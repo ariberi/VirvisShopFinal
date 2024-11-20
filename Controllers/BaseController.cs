@@ -10,6 +10,7 @@ public class BaseController : Controller
         // Cargar los datos compartidos en ViewData
         ViewData["Username"] = HttpContext.Session.GetString("Username");
         ViewData["Role"] = HttpContext.Session.GetString("Role");
+        ViewData["UserId"] = HttpContext.Session.GetString("UserId");
 
 
         Console.WriteLine(HttpContext.Session.GetString("UserRole") + "BASE");

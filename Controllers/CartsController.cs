@@ -28,7 +28,7 @@ namespace VirvisShopFinal.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var userId = 3; // Obtén el UserId del usuario autenticado
+            var userId = 3; // Obtén el UserId del usuario autenticado GetUserId();
 
             // Obtén el carrito del usuario (solo uno, no todos)
             var cart = await _context.Carts
@@ -60,7 +60,7 @@ namespace VirvisShopFinal.Controllers
         {
             try
             {
-                var userId = 3; // Obtén el UserId del usuario autenticado
+                var userId = 3; // Obtén el UserId del usuario autenticado GetUserId();
 
                 // Verificar si el carrito ya existe para el usuario
                 var cart = await _context.Carts
@@ -166,6 +166,69 @@ namespace VirvisShopFinal.Controllers
                 return Json(new { success = false, message = "Hubo un problema al eliminar el producto del carrito." });
             }
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> Checkout()
+        {
+            var userId = 3; // GetUserId();
+
+            // Obtener el carrito del usuario con productos
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.userId == userId);
+
+            if (cart == null || !cart.Items.Any())
+            {
+                TempData["ErrorMessage"] = "Tu carrito está vacío.";
+                return RedirectToAction("Index", "Carts");
+            }
+
+            return View(cart); // Pasar el carrito directamente
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Checkout(string paymentMethod)
+        {
+            var userId = 3; // GetUserId();
+
+            // Obtener el carrito del usuario
+            var cart = await _context.Carts
+                .Include(c => c.Items)
+                .ThenInclude(ci => ci.Product)
+                .FirstOrDefaultAsync(c => c.userId == userId);
+
+            if (cart == null || !cart.Items.Any())
+            {
+                TempData["ErrorMessage"] = "No hay productos en el carrito para procesar.";
+                return RedirectToAction("Index", "Carts");
+            }
+
+            // Redirigir según el método de pago seleccionado
+            switch (paymentMethod.ToLower())
+            {
+                case "cash":
+                    return RedirectToAction("CashPayment", "Orders");
+                case "creditcard":
+                    return RedirectToAction("CardPayment", "Orders");
+                case "banktransfer":
+                    return RedirectToAction("BankTransferPayment", "Orders");
+                default:
+                    TempData["ErrorMessage"] = "Método de pago no válido.";
+                    return RedirectToAction("Checkout");
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

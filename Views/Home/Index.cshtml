@@ -34,6 +34,7 @@
 <main>
     <section class="container my-5">
         <h2 style="justify-content: center; display: flex; align-items: center;">Productos destacados</h2>
+        <div id="message" style="display:none; padding: 10px; margin-top: 10px;"></div>
         <div class="product-cards-container">
             @if (Model != null && Model.Any())
             {
@@ -48,12 +49,11 @@
                             @Html.DisplayFor(modelItem => item.Product.description)
                             </p>
                             <div class="product-card-footer">
-                            <p class="product-card-price">$ @Html.DisplayFor(modelItem => item.Product.price)</p>
-                                <button class="product-card-button">Agregar al carrito</button>
+                                <p class="product-card-price">$ @Html.DisplayFor(modelItem => item.Product.price)</p>
+                                <button class="product-card-button" data-productid="@item.Product.id">Agregar al carrito</button>
                             </div>
                         </div>
                     }
-            
             } else
             {
                 <p>No hay productos disponibles en este momento</p>
@@ -62,3 +62,33 @@
 
     </section>
 </main>
+
+@section Scripts {
+    <script>
+        // Cuando el usuario haga clic en el botón "Agregar al carrito"
+        $(document).on('click', '.product-card-button', function () {
+            var productId = $(this).data('productid'); // Obtener el id del producto
+
+            // Enviar solicitud AJAX al servidor
+            $.ajax({
+                url: '@Url.Action("AddToCart", "Carts")', // URL de la acción en el controlador Cart
+                type: 'POST',
+                data: { productId: productId }, // Enviar el productId al servidor
+                success: function (response) {
+                    // Mostrar el mensaje según la respuesta del servidor
+                    $('#message').text(response.message).css('display', 'block').fadeIn();
+                    if (response.success) {
+                        $('#message').css('color', 'green');
+                    } else {
+                        $('#message').css('color', 'red');
+                    }
+                },
+                error: function () {
+                    // Si ocurre un error
+                    $('#message').text('Hubo un problema al agregar el producto al carrito').css('display', 'block').fadeIn();
+                    $('#message').css('color', 'red');
+                }
+            });
+        });
+    </script>
+}

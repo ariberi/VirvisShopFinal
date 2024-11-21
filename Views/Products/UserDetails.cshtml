@@ -7,12 +7,12 @@
 <main>
     <section class="container my-5">
         <h2 style="justify-content: center; display: flex; align-items: center;">Productos</h2>
+        <div id="message" style="display:none; padding: 10px; margin-top: 10px;"></div>
         <div class="product-cards-container">
             @if (Model != null && Model.Any())
             {
                 @foreach (var item in Model)
                 {
-
                     <div class="product-card">
                         <div class="product-card-image">
                             <img src="@item.img" alt="@item.name" />
@@ -34,12 +34,10 @@
             }
         </div>
     </section>
-    <div id="message" style="display:none; padding: 10px; margin-top: 10px;"></div>
 </main>
 
 
 @section Scripts {
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         // Cuando el usuario haga clic en el botón "Agregar al carrito"
         $(document).on('click', '.product-card-button', function () {

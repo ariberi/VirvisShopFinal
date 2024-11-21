@@ -1,7 +1,5 @@
 ﻿@using VirvisShopFinal.Models
 
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -29,19 +27,23 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Productos
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="UserDetails">Ver Todos</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Indumentaria</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Cuidado Personal</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Tecnologia</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Hogar</a></li>
-                                <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Otros</a></li>
-                            </ul>
-                        </li>
+                        @if (ViewData["Role"] != null && ViewData["Role"].ToString() != "Admin")
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Productos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="Products" asp-action="UserDetails">Ver Todos</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Indumentaria</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Cuidado Personal</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Tecnologia</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Hogar</a></li>
+                                    <li><a class="dropdown-item" asp-area="" asp-controller="" asp-action="">Otros</a></li>
+                                </ul>
+                            </li>
+                        }
+                        
                         @if (ViewData["Role"] != null && ViewData["Role"].ToString() == "Admin")
                         {
                             <li class="nav-item">

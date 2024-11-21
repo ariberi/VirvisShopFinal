@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+<table class="table" style="color: white">
     <thead>
         <tr>
             <th>
@@ -31,10 +31,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.User.id)
+                @Html.DisplayFor(modelItem => item.User.name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.total)
+                $ @Html.DisplayFor(modelItem => item.total)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.status)
@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                @* <a asp-action="Edit" asp-route-id="@item.id">Edit</a> | *@
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> @* | *@
+                @* <a asp-action="Delete" asp-route-id="@item.id">Delete</a> *@
             </td>
         </tr>
 }
